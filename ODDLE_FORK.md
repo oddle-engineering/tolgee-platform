@@ -3,7 +3,7 @@
 This repository is an Oddle-maintained fork of [Tolgee Platform](https://github.com/tolgee/tolgee-platform).
 
 - Production baseline: `v3.240.2`
-- Oddle overlay branch: `oddle/tolgee-v3.240.2-overlay`
+- Oddle overlay branch: `oddle/v3.240.2+oddle`
 - First custom setting: `tolgee.rate-limits.user-limits`
 
 Set `user-limits: false` to disable the authenticated-user global bucket while
