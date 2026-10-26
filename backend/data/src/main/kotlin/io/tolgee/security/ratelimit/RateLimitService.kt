@@ -158,7 +158,7 @@ class RateLimitService(
   ) {
     @Suppress("DEPRECATION") // TODO: remove for Tolgee 4 release
     if (!rateLimitProperties.enabled) return
-    if (!rateLimitProperties.globalLimits) return
+    if (!rateLimitProperties.userLimits) return
 
     consumeBucket(
       RateLimitPolicy(
