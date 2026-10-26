@@ -196,7 +196,7 @@ class RateLimitServiceTest {
   }
 
   @Test
-  fun `global-limits config only affects global limits`() {
+  fun `global-limits config only affects global IP limits`() {
     Mockito.`when`(rateLimitProperties.globalLimits).thenReturn(false)
 
     val fakeRequest = makeFakeGenericRequest()
@@ -205,7 +205,21 @@ class RateLimitServiceTest {
     rateLimitService.consumeGlobalUserRateLimitPolicy(fakeRequest, userAccount.id)
     val authPolicy = rateLimitService.getIpAuthRateLimitPolicy(fakeRequest)
 
-    Mockito.verify(rateLimitService, times(0)).consumeBucket(any())
+    Mockito.verify(rateLimitService, times(1)).consumeBucket(any())
+    assertThat(authPolicy).isNotNull
+  }
+
+  @Test
+  fun `user-limits config only affects global user limits`() {
+    Mockito.`when`(rateLimitProperties.userLimits).thenReturn(false)
+
+    val fakeRequest = makeFakeGenericRequest()
+
+    rateLimitService.consumeGlobalIpRateLimitPolicy(fakeRequest)
+    rateLimitService.consumeGlobalUserRateLimitPolicy(fakeRequest, userAccount.id)
+    val authPolicy = rateLimitService.getIpAuthRateLimitPolicy(fakeRequest)
+
+    Mockito.verify(rateLimitService, times(1)).consumeBucket(any())
     assertThat(authPolicy).isNotNull
   }
 

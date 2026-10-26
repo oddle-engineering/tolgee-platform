@@ -26,6 +26,8 @@ class RateLimitProperties(
   var enabled: Boolean = true,
   @DocProperty(description = "Control whether global limits on the API are enabled or not.")
   var globalLimits: Boolean = true,
+  @DocProperty(description = "Control whether global per-user limits on the API are enabled.")
+  var userLimits: Boolean = true,
   @DocProperty(
     description =
       "Control whether per-endpoint limits on the API are enabled or not.\n" +
